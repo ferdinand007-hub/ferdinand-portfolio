@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ferdinand — AI artist and creatives</title>
-<meta name="description" content="Ferdinand — AI artist and creatives. Luminous painterly worlds.">
+<title>Ferdinand · AI artist and creatives</title>
+<meta name="description" content="Ferdinand · AI artist and creatives. Luminous painterly worlds.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%233d9be9'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3EF%3C/text%3E%3C/svg%3E">
 <style>
   @font-face{
@@ -152,7 +152,7 @@
     text-shadow:0 1px 8px rgba(11,42,74,.5)}
 
   @media (max-width:640px){
-    .planet{width:88px;height:88px;border-width:3px}
+    .planet{border-width:3px}
     .planet .tag{display:none}
     nav a{font-size:.72rem}
     .icon-btn{width:72px;height:72px}
@@ -175,11 +175,7 @@
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="orbit-wrap" id="orbitWrap">
-    <svg class="rings" id="rings" width="1200" height="700" viewBox="0 0 1200 700">
-      <ellipse cx="600" cy="350" rx="430" ry="150"/>
-      <ellipse cx="600" cy="350" rx="560" ry="215"/>
-      <ellipse cx="600" cy="350" rx="300" ry="105"/>
-    </svg>
+    <svg class="rings" id="rings" aria-hidden="true"></svg>
     <div class="planet" data-work="The Ringworks"      style="background-image:url('img/work1-ringworks.png')"><span class="tag">The Ringworks</span></div>
     <div class="planet" data-work="Red Frontier"       style="background-image:url('img/work2-marsbase.png')"><span class="tag">Red Frontier</span></div>
     <div class="planet" data-work="The Ark"            style="background-image:url('img/work3-ark.png')"><span class="tag">The Ark</span></div>
@@ -200,21 +196,21 @@
   <div class="work-intro">
     <div class="kicker">Selected Work</div>
     <h2>Five worlds, one sky</h2>
-    <p>Scroll — each piece gets its own moment.</p>
+    <p>Scroll. Each piece gets its own moment.</p>
   </div>
 
   <section class="work" id="w1">
-    <img class="bg" src="img/work1-ringworks.png" alt="The Ringworks — orbital ring station above Earth">
+    <img class="bg" src="img/work1-ringworks.png" alt="The Ringworks, orbital ring station above Earth">
     <div class="scrim"></div>
     <div class="meta">
       <div class="idx">01</div>
       <h2>The Ringworks</h2>
-      <p>A shipyard ring under construction in low orbit — cranes, sparks, and the curve of Earth below.</p>
+      <p>A shipyard ring under construction in low orbit: cranes, sparks, and the curve of Earth below.</p>
     </div>
   </section>
 
   <section class="work" id="w2">
-    <img class="bg" src="img/work2-marsbase.png" alt="Red Frontier — Mars research base at dusk">
+    <img class="bg" src="img/work2-marsbase.png" alt="Red Frontier, Mars research base at dusk">
     <div class="scrim"></div>
     <div class="meta">
       <div class="idx">02</div>
@@ -224,7 +220,7 @@
   </section>
 
   <section class="work" id="w3">
-    <img class="bg" src="img/work3-ark.png" alt="The Ark — glass greenhouse ship over the Moon">
+    <img class="bg" src="img/work3-ark.png" alt="The Ark, glass greenhouse ship over the Moon">
     <div class="scrim"></div>
     <div class="meta">
       <div class="idx">03</div>
@@ -234,7 +230,7 @@
   </section>
 
   <section class="work" id="w4">
-    <img class="bg" src="img/work4-crescent.png" alt="Moonrise — crescent vessel descending over a moon base">
+    <img class="bg" src="img/work4-crescent.png" alt="Moonrise, crescent vessel descending over a moon base">
     <div class="scrim"></div>
     <div class="meta">
       <div class="idx">04</div>
@@ -244,7 +240,7 @@
   </section>
 
   <section class="work" id="w5">
-    <img class="bg" src="img/work5-shore.png" alt="Still Water — lander resting on an alien shore">
+    <img class="bg" src="img/work5-shore.png" alt="Still Water, lander resting on an alien shore">
     <div class="scrim"></div>
     <div class="meta">
       <div class="idx">05</div>
@@ -259,7 +255,7 @@
   <div class="card">
     <div class="kicker">About</div>
     <h2>I build places you've never been</h2>
-    <p>I'm Ferdinand — an AI artist and creative. I make luminous, painterly worlds: stations above Earth, gardens crossing the dark, shores under alien skies.</p>
+    <p>I'm Ferdinand, an AI artist and creative. I make luminous, painterly worlds: stations above Earth, gardens crossing the dark, shores under alien skies.</p>
     <p>Every piece starts as a feeling and ends as a place. Built with AI, finished with a human eye.</p>
     <div class="loc">Based in Nigeria · Working worldwide</div>
   </div>
@@ -279,7 +275,7 @@
   </div>
 </section>
 
-<footer>© 2026 Ferdinand — painted with light</footer>
+<footer>© 2026 Ferdinand · painted with light</footer>
 
 <script>
 (function(){
@@ -377,13 +373,22 @@
   /* ---------- orbit engine ---------- */
   var wrap = document.getElementById("orbitWrap");
   var planets = Array.prototype.slice.call(document.querySelectorAll(".planet"));
-  var cfg = [
+  var DESKTOP_CFG = [
     {rx:430, ry:150, sp: 0.00016, a: 0.4},
     {rx:560, ry:215, sp:-0.00011, a: 2.4},
     {rx:300, ry:105, sp: 0.00022, a: 4.2},
     {rx:560, ry:215, sp:-0.00011, a: 5.1},
     {rx:430, ry:150, sp: 0.00016, a: 3.3}
   ];
+  /* compact portrait orbit: taller than wide, fits a phone viewport */
+  var MOBILE_CFG = [
+    {rx:112, ry:148, sp: 0.00016, a: 0.4},
+    {rx:145, ry:200, sp:-0.00011, a: 2.4},
+    {rx:80,  ry:102, sp: 0.00022, a: 4.2},
+    {rx:145, ry:200, sp:-0.00011, a: 5.1},
+    {rx:112, ry:148, sp: 0.00016, a: 3.3}
+  ];
+  var cfg = DESKTOP_CFG, planetBase = 132, orbitK = 1;
   var staticAngles = [0.5, 2.1, 4.4, 5.3, 3.0];
   var mx = 0, my = 0, smx = 0, smy = 0;
   window.addEventListener("pointermove", function(e){
@@ -391,22 +396,51 @@
     my = (e.clientY / window.innerHeight - 0.5);
   });
 
+  /* rings are drawn from the active orbit config so they always match the planets */
+  var ringsSvg = document.getElementById("rings");
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var ringCache = "";
+  function buildRings(){
+    var mobile = window.innerWidth < 640;
+    orbitK = mobile ? Math.min(1, window.innerWidth/380) : 1;
+    var key = (mobile ? "m" : "d") + orbitK.toFixed(3);
+    if (key === ringCache) return;
+    ringCache = key;
+    cfg = mobile ? MOBILE_CFG : DESKTOP_CFG;
+    planetBase = mobile ? 76 : 132;
+    while (ringsSvg.firstChild) ringsSvg.removeChild(ringsSvg.firstChild);
+    var seen = {}, maxRx = 0, maxRy = 0, i, c, k2;
+    for (i=0;i<cfg.length;i++){
+      c = cfg[i];
+      if (c.rx > maxRx) maxRx = c.rx;
+      if (c.ry > maxRy) maxRy = c.ry;
+      k2 = c.rx+"x"+c.ry;
+      if (seen[k2]) continue;
+      seen[k2] = 1;
+      var e = document.createElementNS(SVGNS, "ellipse");
+      e.setAttribute("cx", 0); e.setAttribute("cy", 0);
+      e.setAttribute("rx", c.rx); e.setAttribute("ry", c.ry);
+      ringsSvg.appendChild(e);
+    }
+    var pad = mobile ? 44 : 90;
+    ringsSvg.setAttribute("viewBox",
+      (-maxRx-pad)+" "+(-maxRy-pad)+" "+(2*(maxRx+pad))+" "+(2*(maxRy+pad)));
+    ringsSvg.setAttribute("width", Math.round(2*(maxRx+pad)*orbitK));
+    ringsSvg.setAttribute("height", Math.round(2*(maxRy+pad)*orbitK));
+  }
+
   function layoutOrbit(){
+    buildRings();
     var cx = window.innerWidth/2, cy = window.innerHeight*0.42;
-    var scaleUI = Math.min(1, window.innerWidth/1100);
-    var svg = document.getElementById("rings");
-    var sw = 1200*scaleUI, sh = 700*scaleUI;
-    svg.setAttribute("width", sw); svg.setAttribute("height", sh);
-    svg.style.left = "50%"; svg.style.top = "42%";
     for (var i=0;i<planets.length;i++){
       var c = cfg[i], p = planets[i];
       var ang = STATIC ? staticAngles[i] : c.a;
-      var x = cx + Math.cos(ang)*c.rx*scaleUI;
-      var y = cy + Math.sin(ang)*c.ry*scaleUI;
+      var x = cx + Math.cos(ang)*c.rx*orbitK;
+      var y = cy + Math.sin(ang)*c.ry*orbitK;
       var depth = (Math.sin(ang)+1)/2;           // 0 back .. 1 front
-      var sc = (0.62 + depth*0.55) * (0.7 + scaleUI*0.3);
+      var sc = 0.62 + depth*0.55;
       p.style.left = x+"px"; p.style.top = y+"px";
-      p.style.width = p.style.height = (132*sc)+"px";
+      p.style.width = p.style.height = Math.round(planetBase*sc*orbitK)+"px";
       p.style.zIndex = depth > 0.5 ? 4 : 2;
       p.style.opacity = 0.55 + depth*0.45;
     }
