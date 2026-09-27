@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferdinand — AI artist and creatives</title>
+<meta name="description" content="Ferdinand — AI artist and creatives. Luminous painterly worlds.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%233d9be9'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3EF%3C/text%3E%3C/svg%3E">
+<style>
+  @font-face{
+    font-family:'Baloo 2';font-style:normal;font-weight:700 800;font-display:swap;
+    src:url('fonts/baloo2-latin.woff2') format('woff2');
+  }
+  @font-face{
+    font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;
+    src:url('fonts/inter-latin.woff2') format('woff2');
+  }
+  :root{
+    --ink:#0b2a4a;
+    --sky-deep:#2f8fd8;
+    --gold:#ffd66e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:#9fd4f7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  #sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.1rem clamp(1.2rem,4vw,3rem);
+    pointer-events:none;
+  }
+  header a{pointer-events:auto;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;font-size:1.5rem;color:#fff;
+    text-shadow:0 2px 14px rgba(11,42,74,.35);letter-spacing:.01em}
+  nav{display:flex;gap:clamp(1rem,3vw,2.2rem)}
+  nav a{font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:#fff;text-shadow:0 1px 10px rgba(11,42,74,.4);opacity:.92}
+  nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;z-index:1;height:100svh;min-height:620px;overflow:hidden}
+  .orbit-wrap{position:absolute;inset:0;will-change:transform}
+  .rings{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);pointer-events:none}
+  .rings ellipse{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.5}
+  .planet{
+    position:absolute;width:132px;height:132px;border-radius:50%;
+    background-size:cover;background-position:center;
+    border:4px solid rgba(255,255,255,.9);
+    box-shadow:0 12px 40px rgba(11,42,74,.35), 0 0 0 6px rgba(255,255,255,.15);
+    transform:translate(-50%,-50%);
+    will-change:left,top;
+  }
+  .planet .tag{
+    position:absolute;left:50%;bottom:-1.9rem;transform:translateX(-50%);
+    font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:#fff;text-shadow:0 1px 8px rgba(11,42,74,.55);white-space:nowrap;
+  }
+  .hero-core{
+    position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);
+    text-align:center;z-index:5;pointer-events:none;width:100%;padding:0 1rem;
+  }
+  .hero-name{
+    font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;
+    font-size:clamp(4.2rem,15vw,12rem);line-height:1;color:#fff;
+    text-shadow:0 0 34px rgba(255,255,255,.75), 0 6px 30px rgba(11,42,74,.35);
+    letter-spacing:.005em;
+  }
+  .hero-name span{display:inline-block}
+  .hero-role{
+    margin-top:1rem;font-size:clamp(.85rem,2.4vw,1.15rem);font-weight:500;
+    letter-spacing:.34em;text-transform:uppercase;color:#fff;
+    text-shadow:0 2px 12px rgba(11,42,74,.5);
+  }
+  .scroll-cue{
+    position:absolute;left:50%;bottom:2.2rem;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:5;
+    color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+    text-shadow:0 1px 8px rgba(11,42,74,.5);
+  }
+  .scroll-cue .chev{width:22px;height:22px;border-right:3px solid #fff;border-bottom:3px solid #fff;
+    transform:rotate(45deg);animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(6px,6px)}}
+
+  /* ---------- section label ---------- */
+  .kicker{
+    font-size:.78rem;font-weight:600;letter-spacing:.34em;text-transform:uppercase;
+    color:#fff;text-shadow:0 1px 10px rgba(11,42,74,.5);margin-bottom:1.2rem;
+  }
+
+  /* ---------- work: sticky stacking cards ---------- */
+  #work{position:relative;z-index:2}
+  .work{position:sticky;top:0;height:100svh;min-height:620px;overflow:hidden;
+    display:flex;align-items:flex-end}
+  .work img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .work .scrim{position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(6,24,44,.72) 0%, rgba(6,24,44,.18) 42%, rgba(6,24,44,0) 65%)}
+  .work .meta{position:relative;z-index:2;padding:0 clamp(1.4rem,5vw,4.5rem) clamp(3rem,9vh,5.5rem);color:#fff;max-width:900px}
+  .work .idx{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;font-size:clamp(1rem,2.4vw,1.4rem);
+    color:var(--gold);text-shadow:0 2px 10px rgba(0,0,0,.5);letter-spacing:.1em;margin-bottom:.4rem}
+  .work h2{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;
+    font-size:clamp(2.6rem,8vw,6rem);line-height:1.02;
+    text-shadow:0 4px 26px rgba(0,0,0,.55)}
+  .work p{margin-top:.8rem;font-size:clamp(.95rem,2.4vw,1.15rem);font-weight:500;
+    color:rgba(255,255,255,.92);text-shadow:0 2px 10px rgba(0,0,0,.5);max-width:34rem}
+  .work-intro{
+    position:relative;z-index:2;padding:22vh clamp(1.4rem,5vw,4.5rem) 8vh;
+    text-align:center;
+  }
+  .work-intro h2{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;color:#fff;
+    font-size:clamp(2.8rem,9vw,6.5rem);line-height:1;
+    text-shadow:0 0 30px rgba(255,255,255,.6), 0 4px 22px rgba(11,42,74,.4)}
+  .work-intro p{margin-top:1rem;color:#fff;font-weight:500;letter-spacing:.06em;
+    text-shadow:0 2px 10px rgba(11,42,74,.5)}
+
+  /* ---------- about ---------- */
+  #about{position:relative;z-index:2;padding:24vh clamp(1.4rem,6vw,4rem);text-align:center}
+  #about .card{max-width:46rem;margin:0 auto}
+  #about h2{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;color:#fff;
+    font-size:clamp(2.4rem,7vw,4.6rem);
+    text-shadow:0 0 26px rgba(255,255,255,.6), 0 4px 20px rgba(11,42,74,.4);margin-bottom:1.6rem}
+  #about p{font-size:clamp(1.05rem,2.8vw,1.35rem);line-height:1.75;font-weight:500;color:#fff;
+    text-shadow:0 2px 12px rgba(11,42,74,.55)}
+  #about p + p{margin-top:1.1rem}
+  #about .loc{margin-top:2rem;font-size:.8rem;font-weight:600;letter-spacing:.28em;
+    text-transform:uppercase;color:#fff;opacity:.9;text-shadow:0 1px 8px rgba(11,42,74,.5)}
+
+  /* ---------- contact ---------- */
+  #contact{position:relative;z-index:2;min-height:92svh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;padding:4rem 1.4rem}
+  #contact h2{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;color:#fff;
+    font-size:clamp(3rem,11vw,7.5rem);line-height:1;
+    text-shadow:0 0 34px rgba(255,255,255,.65), 0 6px 26px rgba(11,42,74,.4);margin-bottom:2.6rem}
+  .icon-row{display:flex;gap:1.6rem}
+  .icon-btn{
+    width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.92);box-shadow:0 10px 34px rgba(11,42,74,.3);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .icon-btn:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 18px 44px rgba(11,42,74,.4)}
+  .icon-btn svg{width:36px;height:36px;fill:var(--ink)}
+  footer{position:relative;z-index:2;text-align:center;padding:0 1rem 2.4rem;
+    color:#fff;font-size:.78rem;font-weight:500;letter-spacing:.12em;
+    text-shadow:0 1px 8px rgba(11,42,74,.5)}
+
+  @media (max-width:640px){
+    .planet{width:88px;height:88px;border-width:3px}
+    .planet .tag{display:none}
+    nav a{font-size:.72rem}
+    .icon-btn{width:72px;height:72px}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="sky"></canvas>
+
+<header>
+  <a class="brand" href="#top">Ferdinand</a>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="orbit-wrap" id="orbitWrap">
+    <svg class="rings" id="rings" width="1200" height="700" viewBox="0 0 1200 700">
+      <ellipse cx="600" cy="350" rx="430" ry="150"/>
+      <ellipse cx="600" cy="350" rx="560" ry="215"/>
+      <ellipse cx="600" cy="350" rx="300" ry="105"/>
+    </svg>
+    <div class="planet" data-work="The Ringworks"      style="background-image:url('img/work1-ringworks.png')"><span class="tag">The Ringworks</span></div>
+    <div class="planet" data-work="Red Frontier"       style="background-image:url('img/work2-marsbase.png')"><span class="tag">Red Frontier</span></div>
+    <div class="planet" data-work="The Ark"            style="background-image:url('img/work3-ark.png')"><span class="tag">The Ark</span></div>
+    <div class="planet" data-work="Moonrise"           style="background-image:url('img/work4-crescent.png')"><span class="tag">Moonrise</span></div>
+    <div class="planet" data-work="Still Water"        style="background-image:url('img/work5-shore.png')"><span class="tag">Still Water</span></div>
+  </div>
+
+  <div class="hero-core">
+    <div class="hero-name" id="heroName">Ferdinand</div>
+    <div class="hero-role">AI artist &amp; creatives</div>
+  </div>
+
+  <div class="scroll-cue"><span>Scroll</span><span class="chev"></span></div>
+</section>
+
+<!-- ============ WORK ============ -->
+<div id="work">
+  <div class="work-intro">
+    <div class="kicker">Selected Work</div>
+    <h2>Five worlds, one sky</h2>
+    <p>Scroll — each piece gets its own moment.</p>
+  </div>
+
+  <section class="work" id="w1">
+    <img class="bg" src="img/work1-ringworks.png" alt="The Ringworks — orbital ring station above Earth">
+    <div class="scrim"></div>
+    <div class="meta">
+      <div class="idx">01</div>
+      <h2>The Ringworks</h2>
+      <p>A shipyard ring under construction in low orbit — cranes, sparks, and the curve of Earth below.</p>
+    </div>
+  </section>
+
+  <section class="work" id="w2">
+    <img class="bg" src="img/work2-marsbase.png" alt="Red Frontier — Mars research base at dusk">
+    <div class="scrim"></div>
+    <div class="meta">
+      <div class="idx">02</div>
+      <h2>Red Frontier</h2>
+      <p>A research outpost holding a captured asteroid above the rust-red dunes of Mars.</p>
+    </div>
+  </section>
+
+  <section class="work" id="w3">
+    <img class="bg" src="img/work3-ark.png" alt="The Ark — glass greenhouse ship over the Moon">
+    <div class="scrim"></div>
+    <div class="meta">
+      <div class="idx">03</div>
+      <h2>The Ark</h2>
+      <p>A glass garden-ship carrying a living forest across the dark, low over the lunar surface.</p>
+    </div>
+  </section>
+
+  <section class="work" id="w4">
+    <img class="bg" src="img/work4-crescent.png" alt="Moonrise — crescent vessel descending over a moon base">
+    <div class="scrim"></div>
+    <div class="meta">
+      <div class="idx">04</div>
+      <h2>Moonrise</h2>
+      <p>A crescent vessel descends through the clouds toward the lights of a surface base.</p>
+    </div>
+  </section>
+
+  <section class="work" id="w5">
+    <img class="bg" src="img/work5-shore.png" alt="Still Water — lander resting on an alien shore">
+    <div class="scrim"></div>
+    <div class="meta">
+      <div class="idx">05</div>
+      <h2>Still Water</h2>
+      <p>A weathered lander rests on a black-sand shore under the gaze of a ringed giant.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="card">
+    <div class="kicker">About</div>
+    <h2>I build places you've never been</h2>
+    <p>I'm Ferdinand — an AI artist and creative. I make luminous, painterly worlds: stations above Earth, gardens crossing the dark, shores under alien skies.</p>
+    <p>Every piece starts as a feeling and ends as a place. Built with AI, finished with a human eye.</p>
+    <div class="loc">Based in Nigeria · Working worldwide</div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="kicker">Contact</div>
+  <h2>Let's talk</h2>
+  <div class="icon-row">
+    <a class="icon-btn" href="https://x.com/ferddev" target="_blank" rel="noopener" aria-label="Ferdinand on X">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a class="icon-btn" href="mailto:f3rdy15@outlook.com" aria-label="Email Ferdinand">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>© 2026 Ferdinand — painted with light</footer>
+
+<script>
+(function(){
+  "use strict";
+  var QS = new URLSearchParams(location.search);
+  var STATIC = QS.has("static") ||
+    (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  /* ---------- bubbly per-letter wobble on the hero name ---------- */
+  var nameEl = document.getElementById("heroName");
+  var txt = nameEl.textContent;
+  nameEl.textContent = "";
+  var wobbles = [
+    {r:-4,y:6},{r:3,y:-4},{r:-2,y:5},{r:4,y:-6},{r:-5,y:4},{r:2,y:-3},{r:-3,y:6},{r:5,y:-5},{r:-2,y:3}
+  ];
+  for (var i=0;i<txt.length;i++){
+    var s = document.createElement("span");
+    s.textContent = txt[i];
+    var w = wobbles[i % wobbles.length];
+    s.style.transform = "rotate("+w.r+"deg) translateY("+w.y+"px)";
+    nameEl.appendChild(s);
+  }
+
+  /* ---------- sky canvas: gradient, sun, drifting clouds, birds ---------- */
+  var cv = document.getElementById("sky"), ctx = cv.getContext("2d");
+  var W, H, clouds = [], birds = [], t = 0;
+  function resize(){
+    W = cv.width = window.innerWidth;
+    H = cv.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize); resize();
+
+  function seedSky(){
+    clouds = [];
+    var n = Math.max(9, Math.floor(W/140));
+    for (var i=0;i<n;i++){
+      clouds.push({
+        x: Math.random()*W, y: H*0.06 + Math.random()*H*0.55,
+        s: 60 + Math.random()*150, v: 6 + Math.random()*14,
+        a: 0.35 + Math.random()*0.4
+      });
+    }
+    birds = [];
+    for (var j=0;j<5;j++){
+      birds.push({x: Math.random()*W, y: H*0.12+Math.random()*H*0.3,
+        v: 22+Math.random()*20, ph: Math.random()*6.28, s: 5+Math.random()*4});
+    }
+  }
+  seedSky();
+
+  function drawCloud(c){
+    var g = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.s);
+    g.addColorStop(0, "rgba(255,255,255,"+c.a+")");
+    g.addColorStop(0.55, "rgba(255,255,255,"+(c.a*0.55)+")");
+    g.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.ellipse(c.x, c.y, c.s*1.7, c.s*0.62, 0, 0, 6.2832);
+    ctx.fill();
+    // puff lobes
+    ctx.beginPath(); ctx.ellipse(c.x-c.s*0.7, c.y+c.s*0.12, c.s*0.8, c.s*0.4, 0, 0, 6.2832); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(c.x+c.s*0.75, c.y+c.s*0.1, c.s*0.85, c.s*0.42, 0, 0, 6.2832); ctx.fill();
+  }
+
+  function drawSky(){
+    var g = ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0, "#2f8fd8");
+    g.addColorStop(0.45, "#6db9ec");
+    g.addColorStop(0.75, "#a8dcff");
+    g.addColorStop(1, "#d9f1ff");
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+    // sun glow, upper right
+    var sx = W*0.82, sy = H*0.16;
+    var sg = ctx.createRadialGradient(sx,sy,0,sx,sy,Math.max(W,H)*0.35);
+    sg.addColorStop(0,"rgba(255,246,214,.95)");
+    sg.addColorStop(0.25,"rgba(255,240,196,.5)");
+    sg.addColorStop(1,"rgba(255,240,196,0)");
+    ctx.fillStyle = sg; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = "#fffbeF";
+    ctx.beginPath(); ctx.arc(sx,sy,Math.max(26,W*0.022),0,6.2832); ctx.fill();
+    // clouds
+    for (var i=0;i<clouds.length;i++) drawCloud(clouds[i]);
+    // birds
+    ctx.strokeStyle = "rgba(11,42,74,.55)"; ctx.lineWidth = 2; ctx.lineCap="round";
+    for (var j=0;j<birds.length;j++){
+      var b = birds[j], w = Math.sin(t*6 + b.ph)*3;
+      ctx.beginPath();
+      ctx.moveTo(b.x-b.s, b.y);
+      ctx.quadraticCurveTo(b.x-b.s*0.4, b.y-b.s*0.7+w, b.x, b.y);
+      ctx.quadraticCurveTo(b.x+b.s*0.4, b.y-b.s*0.7+w, b.x+b.s, b.y);
+      ctx.stroke();
+    }
+  }
+
+  /* ---------- orbit engine ---------- */
+  var wrap = document.getElementById("orbitWrap");
+  var planets = Array.prototype.slice.call(document.querySelectorAll(".planet"));
+  var cfg = [
+    {rx:430, ry:150, sp: 0.00016, a: 0.4},
+    {rx:560, ry:215, sp:-0.00011, a: 2.4},
+    {rx:300, ry:105, sp: 0.00022, a: 4.2},
+    {rx:560, ry:215, sp:-0.00011, a: 5.1},
+    {rx:430, ry:150, sp: 0.00016, a: 3.3}
+  ];
+  var staticAngles = [0.5, 2.1, 4.4, 5.3, 3.0];
+  var mx = 0, my = 0, smx = 0, smy = 0;
+  window.addEventListener("pointermove", function(e){
+    mx = (e.clientX / window.innerWidth - 0.5);
+    my = (e.clientY / window.innerHeight - 0.5);
+  });
+
+  function layoutOrbit(){
+    var cx = window.innerWidth/2, cy = window.innerHeight*0.42;
+    var scaleUI = Math.min(1, window.innerWidth/1100);
+    var svg = document.getElementById("rings");
+    var sw = 1200*scaleUI, sh = 700*scaleUI;
+    svg.setAttribute("width", sw); svg.setAttribute("height", sh);
+    svg.style.left = "50%"; svg.style.top = "42%";
+    for (var i=0;i<planets.length;i++){
+      var c = cfg[i], p = planets[i];
+      var ang = STATIC ? staticAngles[i] : c.a;
+      var x = cx + Math.cos(ang)*c.rx*scaleUI;
+      var y = cy + Math.sin(ang)*c.ry*scaleUI;
+      var depth = (Math.sin(ang)+1)/2;           // 0 back .. 1 front
+      var sc = (0.62 + depth*0.55) * (0.7 + scaleUI*0.3);
+      p.style.left = x+"px"; p.style.top = y+"px";
+      p.style.width = p.style.height = (132*sc)+"px";
+      p.style.zIndex = depth > 0.5 ? 4 : 2;
+      p.style.opacity = 0.55 + depth*0.45;
+    }
+  }
+
+  var last = 0;
+  function tick(now){
+    var dt = Math.min(50, now - (last||now)); last = now;
+    if (!STATIC){
+      t += dt/1000;
+      for (var i=0;i<cfg.length;i++) cfg[i].a += cfg[i].sp * dt;
+      for (var j=0;j<clouds.length;j++){
+        clouds[j].x += clouds[j].v * dt/1000;
+        if (clouds[j].x - clouds[j].s*2 > W) clouds[j].x = -clouds[j].s*2;
+      }
+      for (var k=0;k<birds.length;k++){
+        birds[k].x += birds[k].v * dt/1000;
+        if (birds[k].x > W+30) birds[k].x = -30;
+      }
+      // eased mouse parallax
+      smx += (mx - smx)*0.04; smy += (my - smy)*0.04;
+      wrap.style.transform = "translate("+(smx*26)+"px,"+(smy*18)+"px)";
+      layoutOrbit();
+    }
+    drawSky();
+    if (!STATIC) requestAnimationFrame(tick);
+  }
+  window.addEventListener("resize", layoutOrbit);
+  layoutOrbit();
+  if (STATIC){ drawSky(); }
+  else { requestAnimationFrame(tick); }
+
+  /* ---------- ?solo=<id> isolate one section (for QA screenshots) ---------- */
+  var solo = QS.get("solo");
+  if (solo){
+    var keepEl = document.getElementById(solo);
+    if (keepEl){
+      var node = keepEl, chain = [];
+      while (node && node !== document.body){ chain.push(node); node = node.parentElement; }
+      chain.forEach(function(el){
+        Array.prototype.forEach.call(el.parentElement.children, function(sib){
+          if (sib !== el && sib.id !== "sky" && sib.tagName !== "SCRIPT") sib.style.display = "none";
+        });
+      });
+    }
+  }
+  /* ---------- ?at=<id> instant jump (for QA screenshots) ---------- */
+  var at = QS.get("at");
+  if (at){
+    var target = document.getElementById(at);
+    if (target){
+      document.documentElement.style.scrollBehavior = "auto";
+      window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY);
+    }
+  }
+})();
+</script>
+</body>
+</html>
