@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ferdinand · AI artist and creatives</title>
 <meta name="description" content="Ferdinand · AI artist and creatives. Luminous painterly worlds.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%233d9be9'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3EF%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23e08a4e'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3EF%3C/text%3E%3C/svg%3E">
 <style>
   @font-face{
     font-family:'Baloo 2';font-style:normal;font-weight:700 800;font-display:swap;
@@ -16,8 +16,7 @@
     src:url('fonts/inter-latin.woff2') format('woff2');
   }
   :root{
-    --ink:#0b2a4a;
-    --sky-deep:#2f8fd8;
+    --ink:#5c2a12;
     --gold:#ffd66e;
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -25,7 +24,7 @@
   body{
     font-family:'Inter',system-ui,sans-serif;
     color:var(--ink);
-    background:#9fd4f7;
+    background:#f3c39a;
     overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
   }
@@ -40,10 +39,10 @@
   }
   header a{pointer-events:auto;text-decoration:none;color:var(--ink)}
   .brand{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;font-size:1.5rem;color:#fff;
-    text-shadow:0 2px 14px rgba(11,42,74,.35);letter-spacing:.01em}
+    text-shadow:0 2px 14px rgba(96,44,18,.35);letter-spacing:.01em}
   nav{display:flex;gap:clamp(1rem,3vw,2.2rem)}
   nav a{font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-    color:#fff;text-shadow:0 1px 10px rgba(11,42,74,.4);opacity:.92}
+    color:#fff;text-shadow:0 1px 10px rgba(96,44,18,.4);opacity:.92}
   nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
 
   /* ---------- hero ---------- */
@@ -55,14 +54,14 @@
     position:absolute;width:132px;height:132px;border-radius:50%;
     background-size:cover;background-position:center;
     border:4px solid rgba(255,255,255,.9);
-    box-shadow:0 12px 40px rgba(11,42,74,.35), 0 0 0 6px rgba(255,255,255,.15);
+    box-shadow:0 12px 40px rgba(96,44,18,.35), 0 0 0 6px rgba(255,255,255,.15);
     transform:translate(-50%,-50%);
     will-change:left,top;
   }
   .planet .tag{
     position:absolute;left:50%;bottom:-1.9rem;transform:translateX(-50%);
     font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-    color:#fff;text-shadow:0 1px 8px rgba(11,42,74,.55);white-space:nowrap;
+    color:#fff;text-shadow:0 1px 8px rgba(96,44,18,.55);white-space:nowrap;
   }
   .hero-core{
     position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);
@@ -71,20 +70,20 @@
   .hero-name{
     font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;
     font-size:clamp(4.2rem,15vw,12rem);line-height:1;color:#fff;
-    text-shadow:0 0 34px rgba(255,255,255,.75), 0 6px 30px rgba(11,42,74,.35);
+    text-shadow:0 0 34px rgba(255,255,255,.75), 0 6px 30px rgba(96,44,18,.35);
     letter-spacing:.005em;
   }
   .hero-name span{display:inline-block}
   .hero-role{
     margin-top:1rem;font-size:clamp(.85rem,2.4vw,1.15rem);font-weight:500;
     letter-spacing:.34em;text-transform:uppercase;color:#fff;
-    text-shadow:0 2px 12px rgba(11,42,74,.5);
+    text-shadow:0 2px 12px rgba(96,44,18,.5);
   }
   .scroll-cue{
     position:absolute;left:50%;bottom:2.2rem;transform:translateX(-50%);
     display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:5;
     color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
-    text-shadow:0 1px 8px rgba(11,42,74,.5);
+    text-shadow:0 1px 8px rgba(96,44,18,.5);
   }
   .scroll-cue .chev{width:22px;height:22px;border-right:3px solid #fff;border-bottom:3px solid #fff;
     transform:rotate(45deg);animation:bob 1.8s ease-in-out infinite}
@@ -93,7 +92,7 @@
   /* ---------- section label ---------- */
   .kicker{
     font-size:.78rem;font-weight:600;letter-spacing:.34em;text-transform:uppercase;
-    color:#fff;text-shadow:0 1px 10px rgba(11,42,74,.5);margin-bottom:1.2rem;
+    color:#fff;text-shadow:0 1px 10px rgba(96,44,18,.5);margin-bottom:1.2rem;
   }
 
   /* ---------- work: sticky stacking cards ---------- */
@@ -117,39 +116,39 @@
   }
   .work-intro h2{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;color:#fff;
     font-size:clamp(2.8rem,9vw,6.5rem);line-height:1;
-    text-shadow:0 0 30px rgba(255,255,255,.6), 0 4px 22px rgba(11,42,74,.4)}
+    text-shadow:0 0 30px rgba(255,255,255,.6), 0 4px 22px rgba(96,44,18,.4)}
   .work-intro p{margin-top:1rem;color:#fff;font-weight:500;letter-spacing:.06em;
-    text-shadow:0 2px 10px rgba(11,42,74,.5)}
+    text-shadow:0 2px 10px rgba(96,44,18,.5)}
 
   /* ---------- about ---------- */
   #about{position:relative;z-index:2;padding:24vh clamp(1.4rem,6vw,4rem);text-align:center}
   #about .card{max-width:46rem;margin:0 auto}
   #about h2{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;color:#fff;
     font-size:clamp(2.4rem,7vw,4.6rem);
-    text-shadow:0 0 26px rgba(255,255,255,.6), 0 4px 20px rgba(11,42,74,.4);margin-bottom:1.6rem}
+    text-shadow:0 0 26px rgba(255,255,255,.6), 0 4px 20px rgba(96,44,18,.4);margin-bottom:1.6rem}
   #about p{font-size:clamp(1.05rem,2.8vw,1.35rem);line-height:1.75;font-weight:500;color:#fff;
-    text-shadow:0 2px 12px rgba(11,42,74,.55)}
+    text-shadow:0 2px 12px rgba(96,44,18,.55)}
   #about p + p{margin-top:1.1rem}
   #about .loc{margin-top:2rem;font-size:.8rem;font-weight:600;letter-spacing:.28em;
-    text-transform:uppercase;color:#fff;opacity:.9;text-shadow:0 1px 8px rgba(11,42,74,.5)}
+    text-transform:uppercase;color:#fff;opacity:.9;text-shadow:0 1px 8px rgba(96,44,18,.5)}
 
   /* ---------- contact ---------- */
   #contact{position:relative;z-index:2;min-height:92svh;display:flex;flex-direction:column;
     align-items:center;justify-content:center;text-align:center;padding:4rem 1.4rem}
   #contact h2{font-family:'Baloo 2','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:800;color:#fff;
     font-size:clamp(3rem,11vw,7.5rem);line-height:1;
-    text-shadow:0 0 34px rgba(255,255,255,.65), 0 6px 26px rgba(11,42,74,.4);margin-bottom:2.6rem}
+    text-shadow:0 0 34px rgba(255,255,255,.65), 0 6px 26px rgba(96,44,18,.4);margin-bottom:2.6rem}
   .icon-row{display:flex;gap:1.6rem}
   .icon-btn{
     width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    background:rgba(255,255,255,.92);box-shadow:0 10px 34px rgba(11,42,74,.3);
+    background:rgba(255,255,255,.92);box-shadow:0 10px 34px rgba(96,44,18,.3);
     transition:transform .25s ease, box-shadow .25s ease;
   }
-  .icon-btn:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 18px 44px rgba(11,42,74,.4)}
+  .icon-btn:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 18px 44px rgba(96,44,18,.4)}
   .icon-btn svg{width:36px;height:36px;fill:var(--ink)}
   footer{position:relative;z-index:2;text-align:center;padding:0 1rem 2.4rem;
     color:#fff;font-size:.78rem;font-weight:500;letter-spacing:.12em;
-    text-shadow:0 1px 8px rgba(11,42,74,.5)}
+    text-shadow:0 1px 8px rgba(96,44,18,.5)}
 
   @media (max-width:640px){
     .planet{border-width:3px}
@@ -299,76 +298,26 @@
     nameEl.appendChild(s);
   }
 
-  /* ---------- sky canvas: gradient, sun, drifting clouds, birds ---------- */
+  /* ---------- backdrop: warm gradient image, cover-fit ---------- */
   var cv = document.getElementById("sky"), ctx = cv.getContext("2d");
-  var W, H, clouds = [], birds = [], t = 0;
+  var W, H;
+  var bgImg = new Image();
+  function paintBg(){
+    if (!bgImg.naturalWidth || !W) return;
+    var s = Math.max(W/bgImg.naturalWidth, H/bgImg.naturalHeight);
+    var dw = bgImg.naturalWidth*s, dh = bgImg.naturalHeight*s;
+    ctx.drawImage(bgImg, (W-dw)/2, (H-dh)/2, dw, dh);
+    ctx.fillStyle = "rgba(150,66,26,0.10)";
+    ctx.fillRect(0, 0, W, H);
+  }
   function resize(){
     W = cv.width = window.innerWidth;
     H = cv.height = window.innerHeight;
+    paintBg();
   }
+  bgImg.onload = paintBg;
+  bgImg.src = "img/bg.jpg";
   window.addEventListener("resize", resize); resize();
-
-  function seedSky(){
-    clouds = [];
-    var n = Math.max(9, Math.floor(W/140));
-    for (var i=0;i<n;i++){
-      clouds.push({
-        x: Math.random()*W, y: H*0.06 + Math.random()*H*0.55,
-        s: 60 + Math.random()*150, v: 6 + Math.random()*14,
-        a: 0.35 + Math.random()*0.4
-      });
-    }
-    birds = [];
-    for (var j=0;j<5;j++){
-      birds.push({x: Math.random()*W, y: H*0.12+Math.random()*H*0.3,
-        v: 22+Math.random()*20, ph: Math.random()*6.28, s: 5+Math.random()*4});
-    }
-  }
-  seedSky();
-
-  function drawCloud(c){
-    var g = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.s);
-    g.addColorStop(0, "rgba(255,255,255,"+c.a+")");
-    g.addColorStop(0.55, "rgba(255,255,255,"+(c.a*0.55)+")");
-    g.addColorStop(1, "rgba(255,255,255,0)");
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.ellipse(c.x, c.y, c.s*1.7, c.s*0.62, 0, 0, 6.2832);
-    ctx.fill();
-    // puff lobes
-    ctx.beginPath(); ctx.ellipse(c.x-c.s*0.7, c.y+c.s*0.12, c.s*0.8, c.s*0.4, 0, 0, 6.2832); ctx.fill();
-    ctx.beginPath(); ctx.ellipse(c.x+c.s*0.75, c.y+c.s*0.1, c.s*0.85, c.s*0.42, 0, 0, 6.2832); ctx.fill();
-  }
-
-  function drawSky(){
-    var g = ctx.createLinearGradient(0,0,0,H);
-    g.addColorStop(0, "#2f8fd8");
-    g.addColorStop(0.45, "#6db9ec");
-    g.addColorStop(0.75, "#a8dcff");
-    g.addColorStop(1, "#d9f1ff");
-    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
-    // sun glow, upper right
-    var sx = W*0.82, sy = H*0.16;
-    var sg = ctx.createRadialGradient(sx,sy,0,sx,sy,Math.max(W,H)*0.35);
-    sg.addColorStop(0,"rgba(255,246,214,.95)");
-    sg.addColorStop(0.25,"rgba(255,240,196,.5)");
-    sg.addColorStop(1,"rgba(255,240,196,0)");
-    ctx.fillStyle = sg; ctx.fillRect(0,0,W,H);
-    ctx.fillStyle = "#fffbeF";
-    ctx.beginPath(); ctx.arc(sx,sy,Math.max(26,W*0.022),0,6.2832); ctx.fill();
-    // clouds
-    for (var i=0;i<clouds.length;i++) drawCloud(clouds[i]);
-    // birds
-    ctx.strokeStyle = "rgba(11,42,74,.55)"; ctx.lineWidth = 2; ctx.lineCap="round";
-    for (var j=0;j<birds.length;j++){
-      var b = birds[j], w = Math.sin(t*6 + b.ph)*3;
-      ctx.beginPath();
-      ctx.moveTo(b.x-b.s, b.y);
-      ctx.quadraticCurveTo(b.x-b.s*0.4, b.y-b.s*0.7+w, b.x, b.y);
-      ctx.quadraticCurveTo(b.x+b.s*0.4, b.y-b.s*0.7+w, b.x+b.s, b.y);
-      ctx.stroke();
-    }
-  }
 
   /* ---------- orbit engine ---------- */
   var wrap = document.getElementById("orbitWrap");
@@ -450,28 +399,17 @@
   function tick(now){
     var dt = Math.min(50, now - (last||now)); last = now;
     if (!STATIC){
-      t += dt/1000;
       for (var i=0;i<cfg.length;i++) cfg[i].a += cfg[i].sp * dt;
-      for (var j=0;j<clouds.length;j++){
-        clouds[j].x += clouds[j].v * dt/1000;
-        if (clouds[j].x - clouds[j].s*2 > W) clouds[j].x = -clouds[j].s*2;
-      }
-      for (var k=0;k<birds.length;k++){
-        birds[k].x += birds[k].v * dt/1000;
-        if (birds[k].x > W+30) birds[k].x = -30;
-      }
       // eased mouse parallax
       smx += (mx - smx)*0.04; smy += (my - smy)*0.04;
       wrap.style.transform = "translate("+(smx*26)+"px,"+(smy*18)+"px)";
       layoutOrbit();
     }
-    drawSky();
     if (!STATIC) requestAnimationFrame(tick);
   }
   window.addEventListener("resize", layoutOrbit);
   layoutOrbit();
-  if (STATIC){ drawSky(); }
-  else { requestAnimationFrame(tick); }
+  if (!STATIC){ requestAnimationFrame(tick); }
 
   /* ---------- ?solo=<id> isolate one section (for QA screenshots) ---------- */
   var solo = QS.get("solo");
